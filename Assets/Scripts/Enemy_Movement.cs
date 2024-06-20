@@ -94,6 +94,7 @@ public class Enemy_Movement : MonoBehaviour
     public Rigidbody2D _rig;
     private WheelJoint2D[] _wheels;
     private Vector2 _input;
+    [SerializeField]Transform SpawnedParent;
 
     EnemyWeapon enemyWeapon;
     AdsCaller adsCaller;
@@ -145,6 +146,7 @@ public class Enemy_Movement : MonoBehaviour
         {
 
             GameObject explode3 = Instantiate(Sparks, transform.position, transform.rotation);
+            explode3.transform.parent = SpawnedParent;
             if (explode3 != null)
                 Destroy(explode3, 2);
             if (col.gameObject != null)
@@ -157,12 +159,17 @@ public class Enemy_Movement : MonoBehaviour
 
             if (count_Enemy1_Hit == 3)
             {
-                Instantiate(Fire, transform.position, transform.rotation);
-                Instantiate(Fire1, transform.position, transform.rotation);
+                var g = Instantiate(Fire, transform.position, transform.rotation);
+                var g2 = Instantiate(Fire1, transform.position, transform.rotation);
+                
+                g.transform.parent = SpawnedParent;
+                g2.transform.parent = SpawnedParent;
 
                 audioManager.play("die4");
 
-                Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
+                var g3 = Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
+                g3.transform.parent = SpawnedParent;
+                
                 if (die != null)
                     die.SetActive(true);
 

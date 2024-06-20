@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
 
   
     int count = 0;
+    [SerializeField]Transform SpawnedParent;
 
 
     void Update()
@@ -46,13 +47,13 @@ public class Weapon : MonoBehaviour
          
 
         GameObject BulletOut =  Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
+        BulletOut.transform.parent = SpawnedParent;
         FindObjectOfType<AudioManager>().play("gun");
 
         FindObjectOfType<AudioManager>().play("bulletfly");
 
-        Instantiate(patic,BulletOut.transform.position, firePoint.rotation);
-
+        var g = Instantiate(patic,BulletOut.transform.position, firePoint.rotation);
+        g.transform.parent = SpawnedParent;
         Destroy(BulletOut, 3);
  
     }

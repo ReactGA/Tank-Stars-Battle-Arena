@@ -43,6 +43,8 @@ public class EnemyWeapon : MonoBehaviour
 
     int hitcount = 0;
 
+    [SerializeField]Transform SpawnedParent;
+
     void Update()
     {
         if(putoffbtn)
@@ -73,6 +75,7 @@ public class EnemyWeapon : MonoBehaviour
         {
 
             GameObject explode3 = Instantiate(Sparks, transform.position, transform.rotation);
+            explode3.transform.parent = SpawnedParent;
             if (explode3 != null)
                 Destroy(explode3, 2);
             if (col.gameObject != null)
@@ -87,14 +90,17 @@ public class EnemyWeapon : MonoBehaviour
 
             if (count_Enemy1_Hit == 3)
             {
-                Instantiate(Fire, transform.position, transform.rotation);
-                Instantiate(Fire1, transform.position, transform.rotation);
+                var g = Instantiate(Fire, transform.position, transform.rotation);
+                var g2 = Instantiate(Fire1, transform.position, transform.rotation);
+
+                g.transform.parent = SpawnedParent;
+                g2.transform.parent = SpawnedParent;
 
                 FindObjectOfType<AudioManager>().play("die4");
 
-                Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
-            
-                    die.SetActive(true); 
+                var g3  = Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
+                g3.transform.parent = SpawnedParent;
+                die.SetActive(true); 
 
                 putoffbtn = false;
                  
