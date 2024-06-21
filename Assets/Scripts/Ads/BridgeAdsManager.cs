@@ -9,17 +9,19 @@ public class BridgeAdsManager : MonoBehaviour
 {
     static BridgeAdsManager instance;
     private AdsType adsType;
-    
+
     //subscribe to this event from another class to reward player after ads completes
     public static Action OnRewardedAds_reward;
     void Awake()
     {
-        if(instance == null){
+        if (instance == null)
+        {
             instance = this;
             DontDestroyOnLoad(instance);
-        }else 
+        }
+        else
             Destroy(instance);
-        
+
         Bridge.platform.SendMessage(PlatformMessage.GameReady);
     }
     void Start()
@@ -40,13 +42,25 @@ public class BridgeAdsManager : MonoBehaviour
     private void OnRewardedStateChanged(RewardedState state)
     {
         Debug.Log("Rewarded " + state);
-        if(state == RewardedState.Rewarded){
+        if (state == RewardedState.Rewarded)
+        {
             OnRewardedAds_reward?.Invoke();
+        }
+
+        if (state == RewardedState.Closed)
+        {
+            AudioManager.ChangeSoundState(SoundState.On);
+
         }
     }
     private void OnInterstitialStateChanged(InterstitialState state)
     {
         Debug.Log("Interstitial " + state);
+        if (state == InterstitialState.Closed)
+        {
+            AudioManager.ChangeSoundState(SoundState.On);
+
+        }
     }
     private void OnBannerStateChanged(BannerState state)
     {
@@ -57,10 +71,12 @@ public class BridgeAdsManager : MonoBehaviour
         instance.adsType = type;
         if (instance.adsType == AdsType.Interstitial)
         {
+            AudioManager.ChangeSoundState(SoundState.Off);
             Bridge.advertisement.ShowInterstitial();
         }
         else if (instance.adsType == AdsType.Rewarded)
         {
+            AudioManager.ChangeSoundState(SoundState.Off);
             Bridge.advertisement.ShowRewarded();
         }
         else if (instance.adsType == AdsType.Banner)
@@ -69,7 +85,8 @@ public class BridgeAdsManager : MonoBehaviour
         }
     }
 
-    public static void HideBanner(){
+    public static void HideBanner()
+    {
         Bridge.advertisement.HideBanner();
     }
 

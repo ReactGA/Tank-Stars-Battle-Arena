@@ -96,7 +96,7 @@ public class EnemyWeapon : MonoBehaviour
                 g.transform.parent = SpawnedParent;
                 g2.transform.parent = SpawnedParent;
 
-                FindObjectOfType<AudioManager>().play("die4");
+                AudioManager.play("die4");
 
                 var g3  = Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
                 g3.transform.parent = SpawnedParent;
@@ -126,9 +126,9 @@ public class EnemyWeapon : MonoBehaviour
 
         GameObject BulletOut = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-        FindObjectOfType<AudioManager>().play("gun");
+        AudioManager.play("gun");
 
-        FindObjectOfType<AudioManager>().play("bulletfly");
+        AudioManager.play("bulletfly");
 
         Instantiate(patic, BulletOut.transform.position, firePoint.rotation);
 

@@ -31,7 +31,7 @@ public class jumpout : MonoBehaviour
     {
 
        // Destroy(rb);
-        FindObjectOfType<AudioManager>().play("screem");
+        AudioManager.play("screem");
 
       
 

@@ -48,9 +48,9 @@ public class Weapon : MonoBehaviour
 
         GameObject BulletOut =  Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         BulletOut.transform.parent = SpawnedParent;
-        FindObjectOfType<AudioManager>().play("gun");
+        AudioManager.play("gun");
 
-        FindObjectOfType<AudioManager>().play("bulletfly");
+        AudioManager.play("bulletfly");
 
         var g = Instantiate(patic,BulletOut.transform.position, firePoint.rotation);
         g.transform.parent = SpawnedParent;

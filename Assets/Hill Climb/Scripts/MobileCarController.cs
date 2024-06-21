@@ -94,7 +94,7 @@ public class MobileCarController : MonoBehaviour {
                  
                _fuel = -80;
 
-                FindObjectOfType<AudioManager>().play("hit1");
+                AudioManager.play("hit1");
 
 
             }
@@ -110,7 +110,7 @@ public class MobileCarController : MonoBehaviour {
 
         _rig.AddForce(new Vector2(0,500));
 
-       FindObjectOfType<AudioManager>().play("raise"); 
+       AudioManager.play("raise"); 
     }
 
     public void SetHorizontalInput(int _value)
@@ -133,7 +133,7 @@ ControlCanvas.SetActive(false);
  if(endMenu != null)
  endMenu.SetActive(true);
 
-        FindObjectOfType<AudioManager>().play("ButtonClick");
+        AudioManager.play("ButtonClick");
 
     }
 
@@ -227,7 +227,7 @@ if (!GameOver)
 
                     deadman1.transform.position = pos;
 
-                    FindObjectOfType<AudioManager>().play("screem");
+                    AudioManager.play("screem");
 
                 }
 
@@ -238,7 +238,7 @@ if (!GameOver)
 
                     man1.SetActive(true);
 
-                    FindObjectOfType<AudioManager>().play("screem");
+                    AudioManager.play("screem");
 
                     enemyWeapon.putoffbtn = false;
                 }
@@ -302,7 +302,7 @@ else
 
                 man1.SetActive(true);
 
-                FindObjectOfType<AudioManager>().play("screem");
+                AudioManager.play("screem");
 
                 enemyWeapon.putoffbtn = false;
 

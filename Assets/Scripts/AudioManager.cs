@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
+public enum SoundState { On, Off, SFXOnly, BGOnly }
 public class AudioManager : MonoBehaviour
 {
-
+    public static AudioManager instance;
     public Sound[] sounds;
-    // Start is called before the first frame update
     void Awake()
     {
-        foreach(Sound s in sounds)
+        instance = this;
+
+        foreach (Sound s in sounds)
         {
-          s.source =  gameObject.AddComponent<AudioSource>();
+            s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;
@@ -20,25 +20,45 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-   public void play(string name)
+    public static void play(string name)
     {
-       Sound s= Array.Find(sounds, Sound => Sound.name == name);
-        s.source.Play();
+        if (PlayerPrefs.GetInt("Sound") == 0)
+        {
+            Sound s = Array.Find(instance.sounds, Sound => Sound.name == name);
+
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not found!");
+                return;
+            }
+            s.source.Play();
+        }
     }
 
 
-public void StopPlaying (string sound)
- {
-  Sound s = Array.Find(sounds, item => item.name == sound);
-  if (s == null)
-  {
-   Debug.LogWarning("Sound: " + name + " not found!");
-   return;
-  }
+    public void StopPlaying(string sound)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
 
- 
-  s.source.Stop ();
- }
+        s.source.Stop();
+    }
 
+    public static void ChangeSoundState(SoundState soundState)
+    {
+        var val = soundState == SoundState.On ? 0 : soundState == SoundState.Off ? 1 : 2;
+        PlayerPrefs.SetInt("Sound", val);
+
+        if (val == 1)
+        {
+            var s_Arr = instance.gameObject.GetComponents<AudioSource>();
+            foreach (var s in s_Arr) { s.Stop(); }
+        }
+        Debug.Log("Changed sound state to " + soundState);
+    }
 
 }

@@ -106,7 +106,6 @@ public class Enemy_Movement : MonoBehaviour
     }
 
     float stars = 0;
-    AudioManager audioManager;
 
     void Start()
     {
@@ -135,9 +134,7 @@ public class Enemy_Movement : MonoBehaviour
         enemyWeapon = new EnemyWeapon();
 
         adsCaller = gameObject.AddComponent<AdsCaller>();
-        adsCaller.ShowBannerAds();
-
-        audioManager = FindObjectOfType<AudioManager>();
+        adsCaller.ShowBannerAds();  //Ads
 
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -165,7 +162,7 @@ public class Enemy_Movement : MonoBehaviour
                 g.transform.parent = SpawnedParent;
                 g2.transform.parent = SpawnedParent;
 
-                audioManager.play("die4");
+                AudioManager.play("die4");
 
                 var g3 = Instantiate(Sparks, boos1.transform.position, boos1.transform.rotation);
                 g3.transform.parent = SpawnedParent;
@@ -395,7 +392,7 @@ public class Enemy_Movement : MonoBehaviour
         if (GameOver == true && progressbadge < 100)
         {
             if (progressbadge % 150 == 0)
-                audioManager.play("starin");
+                AudioManager.play("starin");
 
             _fuel += Time.deltaTime * 0.4f + 3.2f * 0.5f / 10;
 
@@ -433,7 +430,7 @@ public class Enemy_Movement : MonoBehaviour
                 star4.SetActive(false);
 
 
-            audioManager.play("coindone");
+            AudioManager.play("coindone");
 
         }
 
@@ -441,7 +438,7 @@ public class Enemy_Movement : MonoBehaviour
         if (GameOver == true && progressbadge == 14)
         {
 
-            audioManager.play("upgrade");
+            AudioManager.play("upgrade");
 
         }
 
@@ -553,7 +550,7 @@ public class Enemy_Movement : MonoBehaviour
                     purple4.SetActive(false);
 
 
-                audioManager.play("upgrade");
+                AudioManager.play("upgrade");
 
             }
 
@@ -616,7 +613,7 @@ public class Enemy_Movement : MonoBehaviour
 
                 //if (secondplayBTN != null)
                 //    secondplayBTN.SetActive(true);
-                FindObjectOfType<AudioManager>().play("upgrade");
+                AudioManager.play("upgrade");
 
                 //FindObjectOfType<AudioManager>().play("Gameplay_song");
             }
@@ -712,7 +709,7 @@ public class Enemy_Movement : MonoBehaviour
 
         finding = true;
 
-        FindObjectOfType<AudioManager>().play("ButtonClick");
+        AudioManager.play("ButtonClick");
 
         if (Win3 != null)
             Win3.SetActive(true);
@@ -721,7 +718,7 @@ public class Enemy_Movement : MonoBehaviour
             win2.SetActive(false);
 
         //Application.OpenURL("http://blubasquiat.com/");
-        adsCaller.ShowInterstitialAds();
+        adsCaller.ShowInterstitialAds(); //ads
     }
 
     public void UpgradeMethod()
@@ -747,7 +744,7 @@ public class Enemy_Movement : MonoBehaviour
         SceneManager.LoadScene("Level_3");
 
         //  Application.OpenURL("http://blubasquiat.com/");
-        FindObjectOfType<AudioManager>().play("ButtonClick");
+        AudioManager.play("ButtonClick");
 
 
     }

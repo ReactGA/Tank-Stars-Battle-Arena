@@ -17,7 +17,7 @@ public class CameraMove : MonoBehaviour {
             gameObject.GetComponent<FadeCamera>().FadeIn();
         }
 
-        FindObjectOfType<AudioManager>().play("battle");
+        AudioManager.play("battle");
 
 
     }

@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
     {
     
         Destroy(rb);
-        FindObjectOfType<AudioManager>().play("hit");
+        AudioManager.play("hit");
 
         GameObject explode3 = Instantiate(Spark,new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
         Destroy(explode3, 2);
