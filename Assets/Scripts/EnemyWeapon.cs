@@ -49,8 +49,19 @@ public class EnemyWeapon : MonoBehaviour
     {
         if(putoffbtn)
         {
-            ran = Random.Range(150.0f, 500.0f);
 
+            Scene scene = SceneManager.GetActiveScene();
+          //  SceneManager.LoadScene("Level_3");
+
+
+            if (scene.buildIndex == 1)
+            ran = Random.Range(150.0f, 200.0f);
+
+            if (scene.buildIndex == 0)
+                ran = Random.Range(1.0f, 500.0f);
+
+            if (scene.buildIndex == 2)
+                ran = Random.Range(1.0f, 50.0f);
             count++;
 
             if (count > ran)

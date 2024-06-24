@@ -68,7 +68,10 @@ public class BridgeAdsManager : MonoBehaviour
     }
     public static void ShowAds(AdsType type)
     {
-        instance.adsType = type;
+
+        instance.adsType = AdsType.Interstitial;
+         
+
         if (instance.adsType == AdsType.Interstitial)
         {
             AudioManager.ChangeSoundState(SoundState.Off);

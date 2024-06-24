@@ -47,7 +47,7 @@ public class Enemy_Movement : MonoBehaviour
 
     public GameObject win;
 
-    public GameObject win2;
+    public GameObject win2, win4;
 
     public GameObject BadgeImg;
 
@@ -410,6 +410,7 @@ public class Enemy_Movement : MonoBehaviour
         if (GameOver == true && progressbadge >= 100)
         {
 
+
             //PlayerPrefs.SetFloat("star", stars);
 
             if (firstpanel != null)
@@ -671,8 +672,18 @@ public class Enemy_Movement : MonoBehaviour
 
     public void ShareMethod()
     {
-        // FindObjectOfType<AudioManager>().play("ButtonClick");
+        //   FindObjectOfType<AudioManager>().play("ButtonClick");
 
+        AudioManager.play("upgrade");
+
+       
+
+
+        if (optiontank != null)
+            optiontank.SetActive(false);
+
+
+  
     }
 
     public void TankMethod()
@@ -697,8 +708,8 @@ public class Enemy_Movement : MonoBehaviour
         if (optionMenu != null)
             optionMenu.SetActive(true);
 
-        if (optiontank != null)
-            optiontank.SetActive(false);
+        //if (optiontank != null)
+        //    optiontank.SetActive(true);
     }
 
 
@@ -740,8 +751,18 @@ public class Enemy_Movement : MonoBehaviour
         // await System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9P59MFRVCFHG"));
         //Application.OpenURL("ms-windows-store://review/?ProductId=9P59MFRVCFHG");
 
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene("Level_3");
+     
+
+        Scene scene = SceneManager.GetActiveScene(); 
+
+        if (scene.buildIndex == 1)
+            SceneManager.LoadScene("Level_3");
+
+        if (scene.buildIndex == 0)
+            SceneManager.LoadScene("Level_2");
+
+        if (scene.buildIndex == 2)
+        SceneManager.LoadScene("Level_1");
 
         //  Application.OpenURL("http://blubasquiat.com/");
         AudioManager.play("ButtonClick");
